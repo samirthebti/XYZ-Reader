@@ -2,7 +2,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
     <com.example.xyzreader.ui.ObservableScrollView
@@ -108,9 +107,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:contentDescription="@string/action_share"
+        android:layout_margin="@dimen/fab_padding"
         android:src="@drawable/ic_share"
-        android:layout_margin="16dp"
-        app:fabSize="normal"
         />
 
 </android.support.design.widget.CoordinatorLayout>

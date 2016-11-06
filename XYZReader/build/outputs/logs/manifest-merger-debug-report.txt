@@ -51,7 +51,7 @@ MERGED from [com.android.support:animated-vector-drawable:24.2.1] /home/thesam/D
 	android:icon
 		ADDED from /home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/src/main/AndroidManifest.xml:13:9-43
 	android:theme
-		ADDED from /home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/src/main/AndroidManifest.xml:15:9-39
+		ADDED from /home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/src/main/AndroidManifest.xml:15:9-40
 activity#com.example.xyzreader.ui.ArticleListActivity
 ADDED from /home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/src/main/AndroidManifest.xml:17:9-24:20
 	android:label

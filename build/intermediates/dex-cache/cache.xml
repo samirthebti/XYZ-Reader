@@ -142,7 +142,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="a786b5953aee1b10d063780d2d4f827d9a398bc3">
+        sha1="02a0ae4985d3ed545b1b480af9eab95e664eba65">
         <dex dex="/home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_56775f2446e148809ef44ca419bade66e69b8c6d/classes.dex" />
     </item>
     <item
