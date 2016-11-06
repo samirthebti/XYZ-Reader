@@ -1,4 +1,4 @@
-<android.support.design.widget.CoordinatorLayout android:id="@+id/draw_insets_frame_layout"
+<com.example.xyzreader.ui.DrawInsetsFrameLayout android:id="@+id/draw_insets_frame_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -111,4 +111,4 @@
         android:src="@drawable/ic_share"
         />
 
-</android.support.design.widget.CoordinatorLayout>
+</com.example.xyzreader.ui.DrawInsetsFrameLayout>
