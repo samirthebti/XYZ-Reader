@@ -39,6 +39,7 @@ public class UpdaterService extends IntentService {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
         if (ni == null || !ni.isConnected()) {
+            //// TODO: 7/11/16 :: add SnakeBar  
             Log.w(TAG, "Not online, not refreshing.");
             return;
         }

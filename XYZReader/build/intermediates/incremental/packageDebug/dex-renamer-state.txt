@@ -1,4 +1,4 @@
-#Sun Nov 06 20:15:32 CET 2016
+#Mon Nov 07 21:59:46 CET 2016
 base.0=/home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_56775f2446e148809ef44ca419bade66e69b8c6d
 renamed.1=classes2.dex
 renamed.0=classes.dex
