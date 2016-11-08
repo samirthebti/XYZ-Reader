@@ -138,6 +138,7 @@
     <orderEntry type="library" exported="" name="support-annotations-24.2.1" level="project" />
     <orderEntry type="library" exported="" name="palette-v7-24.2.1" level="project" />
     <orderEntry type="library" exported="" name="okhttp-3.1.2" level="project" />
+    <orderEntry type="library" exported="" name="glide-3.7.0" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-24.2.1" level="project" />
     <orderEntry type="library" exported="" name="design-24.2.1" level="project" />
   </component>
