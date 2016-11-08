@@ -5,12 +5,10 @@ import android.app.FragmentManager;
 import android.app.LoaderManager;
 import android.content.Loader;
 import android.database.Cursor;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.TypedValue;
 import android.view.ViewGroup;
 
 import com.example.xyzreader.R;
@@ -41,10 +39,6 @@ public class ArticleDetailActivity extends AppCompatActivity
         mPagerAdapter = new MyPagerAdapter(getFragmentManager());
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(mPagerAdapter);
-        mPager.setPageMargin((int) TypedValue
-                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics()));
-        mPager.setPageMarginDrawable(new ColorDrawable(0x22000000));
-
         mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageScrollStateChanged(int state) {
@@ -110,11 +104,6 @@ public class ArticleDetailActivity extends AppCompatActivity
         @Override
         public void setPrimaryItem(ViewGroup container, int position, Object object) {
             super.setPrimaryItem(container, position, object);
-            ArticleDetailFragment fragment = (ArticleDetailFragment) object;
-            if (fragment != null) {
-//                mSelectedItemUpButtonFloor = fragment.getUpButtonFloor();
-//                updateUpButtonPosition();
-            }
         }
 
         @Override
