@@ -151,7 +151,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="4e8d23fa7800ce991759420205751cc2c74b44d9">
+        sha1="f9bfdd9d9070ca63a7d5a1490e2ada028f3bfd4e">
         <dex dex="/home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_1efbe98f599f0fd4ec3457b361e594ad3c6db1fa/classes.dex" />
     </item>
     <item
@@ -187,7 +187,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="551241c5713177af799403f0bc2a3834e329eaa2">
+        sha1="e3fd498a4c178a7adeb0412af08c9fbb6d01f6f2">
         <dex dex="/home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_56775f2446e148809ef44ca419bade66e69b8c6d/classes.dex" />
     </item>
     <item
