@@ -5,12 +5,14 @@ import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ShareCompat;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.format.DateUtils;
@@ -20,10 +22,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
 
@@ -48,6 +55,7 @@ public class ArticleDetailFragment extends Fragment implements
     private TextView bylineView;
     private TextView titleView;
     private TextView bodyView;
+    private LinearLayout metaBar;
 
 
     /**
@@ -103,6 +111,7 @@ public class ArticleDetailFragment extends Fragment implements
         titleView = (TextView) mRootView.findViewById(R.id.article_title);
         bylineView = (TextView) mRootView.findViewById(R.id.article_byline);
         bodyView = (TextView) mRootView.findViewById(R.id.article_body);
+        metaBar = (LinearLayout) mRootView.findViewById(R.id.meta_bar);
         // set up the toolbar
         mToolbar = (Toolbar) mRootView.findViewById(R.id.detail_toolbar);
         ((ArticleDetailActivity) getActivity()).setSupportActionBar(mToolbar);
@@ -158,6 +167,22 @@ public class ArticleDetailFragment extends Fragment implements
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .centerCrop()
                     .dontAnimate()
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            Bitmap bitmap = ((GlideBitmapDrawable) resource.getCurrent()).getBitmap();
+                            Palette palette = Palette.generate(bitmap);
+                            int defaultColor = 0xFF333333;
+                            int color = palette.getDarkVibrantColor(defaultColor);
+                            metaBar.setBackgroundColor(color);
+                            return false;
+                        }
+                    })
                     .into(mPhotoView);
             shareActionButton.setOnClickListener(new OnClickListener() {
                 @Override
@@ -169,7 +194,7 @@ public class ArticleDetailFragment extends Fragment implements
                 }
             });
         } else {
-            Snackbar.make(mCoordinatorLayout,"Erreur Inconnue ",Snackbar.LENGTH_LONG).show();
+            Snackbar.make(mCoordinatorLayout, "Erreur Inconnue ", Snackbar.LENGTH_LONG).show();
         }
 
 
