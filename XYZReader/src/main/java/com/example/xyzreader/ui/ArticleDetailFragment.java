@@ -116,6 +116,7 @@ public class ArticleDetailFragment extends Fragment implements
         mToolbar = (Toolbar) mRootView.findViewById(R.id.detail_toolbar);
         ((ArticleDetailActivity) getActivity()).setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        ((ArticleDetailActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         mToolbar.setNavigationOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,7 +159,7 @@ public class ArticleDetailFragment extends Fragment implements
                             + "</font>"));
             bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY)));
             if (mToolbar != null) {
-                mToolbar.setTitle(title);
+//                mToolbar.setTitle(title);
             }
 
             titleView.setText(title);
