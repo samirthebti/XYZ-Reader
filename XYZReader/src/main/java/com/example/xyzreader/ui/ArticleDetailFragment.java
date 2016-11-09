@@ -13,7 +13,6 @@ import android.support.v4.app.ShareCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.format.DateUtils;
-import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -103,6 +102,16 @@ public class ArticleDetailFragment extends Fragment implements
         titleView = (TextView) mRootView.findViewById(R.id.article_title);
         bylineView = (TextView) mRootView.findViewById(R.id.article_byline);
         bodyView = (TextView) mRootView.findViewById(R.id.article_body);
+        // set up the toolbar
+        mToolbar = (Toolbar) mRootView.findViewById(R.id.detail_toolbar);
+        ((ArticleDetailActivity) getActivity()).setSupportActionBar(mToolbar);
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        mToolbar.setNavigationOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
         getLoaderManager().initLoader(0, null, this);
         return mRootView;
     }
@@ -121,15 +130,8 @@ public class ArticleDetailFragment extends Fragment implements
             mCursor.close();
             mCursor = null;
         }
-        bylineView.setMovementMethod(new LinkMovementMethod());
-        mToolbar = (Toolbar) mRootView.findViewById(R.id.detail_toolbar);
-        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
-        mToolbar.setNavigationOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().finish();
-            }
-        });
+
+
         bodyView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "Rosario-Regular.ttf"));
 
         if (mCursor != null) {
