@@ -51,6 +51,7 @@ public class Adapter extends CursorRecyclerViewAdapter<Adapter.ViewHolder> {
                 .load(thumb)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .dontAnimate()
+                .centerCrop()
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -64,7 +65,7 @@ public class Adapter extends CursorRecyclerViewAdapter<Adapter.ViewHolder> {
                         int defaultColor = 0xFF333333;
                         int color = palette.getVibrantColor(defaultColor);
                         holder.itemView.setBackgroundColor(color);
-                        return true;
+                        return false;
                     }
                 })
                 .into(holder.thumbnailView);

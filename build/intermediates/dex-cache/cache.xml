@@ -21,15 +21,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="/home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/libs/volley.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="c68094cbd011a3f9dccbfe16e77a2cf43622e277">
-        <dex dex="/home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/build/intermediates/transforms/dex/debug/folders/1000/2/volley_fd017b37d8dcb6bdb2bcf6eebca89d12da390fe8/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -151,7 +142,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="f9bfdd9d9070ca63a7d5a1490e2ada028f3bfd4e">
+        sha1="21ad56e1366fc37935d1ad8b1f0955c38fb717d1">
         <dex dex="/home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_1efbe98f599f0fd4ec3457b361e594ad3c6db1fa/classes.dex" />
     </item>
     <item
@@ -187,7 +178,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="e3fd498a4c178a7adeb0412af08c9fbb6d01f6f2">
+        sha1="5abf2573b3de22214c5c88e23848bfcdca658aa3">
         <dex dex="/home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_56775f2446e148809ef44ca419bade66e69b8c6d/classes.dex" />
     </item>
     <item
