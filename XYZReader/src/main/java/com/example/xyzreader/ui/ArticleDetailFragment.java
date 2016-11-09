@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -136,7 +137,7 @@ public class ArticleDetailFragment extends Fragment implements
 
         if (mCursor != null) {
             mRootView.setVisibility(View.VISIBLE);
-            titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
+            final String title = mCursor.getString(ArticleLoader.Query.TITLE);
 
             bylineView.setText(Html.fromHtml(
                     DateUtils.getRelativeTimeSpanString(
@@ -148,9 +149,10 @@ public class ArticleDetailFragment extends Fragment implements
                             + "</font>"));
             bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY)));
             if (mToolbar != null) {
-                mToolbar.setTitle(mCursor.getString(ArticleLoader.Query.TITLE));
+                mToolbar.setTitle(title);
             }
 
+            titleView.setText(title);
             Glide.with(getActivity())
                     .load(mCursor.getString(ArticleLoader.Query.PHOTO_URL))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -167,10 +169,7 @@ public class ArticleDetailFragment extends Fragment implements
                 }
             });
         } else {
-            mRootView.setVisibility(View.GONE);
-            titleView.setText("N/A");
-            bylineView.setText("N/A");
-            bodyView.setText("N/A");
+            Snackbar.make(mCoordinatorLayout,"Erreur Inconnue ",Snackbar.LENGTH_LONG).show();
         }
 
 
