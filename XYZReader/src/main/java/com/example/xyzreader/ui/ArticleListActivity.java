@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -49,6 +50,7 @@ public class ArticleListActivity extends AppCompatActivity implements
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.list_content);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        Typeface mTypeface = Typeface.createFromAsset(getResources().getAssets(),"Rosario-Regular.ttf");
 
 
         int columnCount = getResources().getInteger(R.integer.list_column_count);

@@ -3,5 +3,6 @@
     <string name="app_name">XYZ Reader</string>
 
     <string name="action_share">Share</string>
+    <string name="errer_message">Erreur Inconnue</string>
 
 </resources>

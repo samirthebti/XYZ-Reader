@@ -138,8 +138,8 @@ public class ArticleDetailFragment extends Fragment implements
             mCursor = null;
         }
 
+        Typeface mainTypeface = Typeface.createFromAsset(getResources().getAssets(), "Rosario-Regular.ttf");
 
-        bodyView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "Rosario-Regular.ttf"));
 
         if (mCursor != null) {
             mRootView.setVisibility(View.VISIBLE);
@@ -155,8 +155,6 @@ public class ArticleDetailFragment extends Fragment implements
                             + "</font>"));
             bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY)));
             if (mToolbar != null) {
-//                mToolbar.setTitle(title);
-//                ((ArticleDetailActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
                 ((ArticleDetailActivity) getActivity()).setSupportActionBar(mToolbar);
                 mToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
                 ((ArticleDetailActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -169,6 +167,9 @@ public class ArticleDetailFragment extends Fragment implements
             }
 
             titleView.setText(title);
+            bodyView.setTypeface(mainTypeface);
+            bylineView.setTypeface(mainTypeface);
+            titleView.setTypeface(mainTypeface);
             Glide.with(getActivity())
                     .load(mCursor.getString(ArticleLoader.Query.PHOTO_URL))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -212,7 +213,7 @@ public class ArticleDetailFragment extends Fragment implements
                 }
             });
         } else {
-            Snackbar.make(mCoordinatorLayout, "Erreur Inconnue ", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(mCoordinatorLayout, R.string.errer_message, Snackbar.LENGTH_LONG).show();
         }
 
 

@@ -119,14 +119,7 @@
                     "endOffset": 713
                 },
                 "from": {
-                    "file": "/home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/src/main/res/values-sw600dp/dimens.xml",
-                    "position": {
-                        "startLine": 8,
-                        "startColumn": 4,
-                        "startOffset": 383,
-                        "endColumn": 56,
-                        "endOffset": 435
-                    }
+                    "file": "/home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/src/main/res/values-sw600dp/dimens.xml"
                 }
             },
             {
@@ -314,9 +307,28 @@
                     "startLine": 27,
                     "startColumn": 4,
                     "startOffset": 1703,
-                    "endLine": 30,
+                    "endColumn": 49,
+                    "endOffset": 1748
+                },
+                "from": {
+                    "file": "/home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/src/main/res/values-sw600dp/macro_layout.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 102,
+                        "endColumn": 49,
+                        "endOffset": 147
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 1753,
+                    "endLine": 31,
                     "endColumn": 12,
-                    "endOffset": 1880
+                    "endOffset": 1930
                 },
                 "from": {
                     "file": "/home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/build/intermediates/exploded-aar/com.android.support/design/25.0.0/res/values-sw600dp-v13/values-sw600dp-v13.xml"
