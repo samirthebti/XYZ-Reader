@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.app.AppCompatActivity;
@@ -108,7 +110,6 @@ public class ArticleListActivity extends AppCompatActivity implements OnRefreshL
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         adapter.swapCursor(cursor);
-
     }
 
     @Override
@@ -119,5 +120,9 @@ public class ArticleListActivity extends AppCompatActivity implements OnRefreshL
     @Override
     public void onRefresh() {
         startService(new Intent(this, UpdaterService.class));
+        Snackbar.make(mCoordinatorLayout, R.string.refreshed_string, Snackbar.LENGTH_LONG)
+                .setAction(R.string.OK, null)
+                .setActionTextColor(Color.GREEN)
+                .show();
     }
 }

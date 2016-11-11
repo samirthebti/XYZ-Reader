@@ -11,7 +11,14 @@
                     "endOffset": 100
                 },
                 "from": {
-                    "file": "/home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/src/main/res/values-w800dp/macro_layout.xml"
+                    "file": "/home/thesam/Desktop/Udacity Android Nanodegree/P4-Make me Material/xyzreader/XYZReader/src/main/res/values-w800dp/macro_layout.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 61,
+                        "endColumn": 49,
+                        "endOffset": 106
+                    }
                 }
             }
         ]

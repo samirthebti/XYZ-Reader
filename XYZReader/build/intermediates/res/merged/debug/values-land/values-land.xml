@@ -9,6 +9,7 @@
     <dimen name="nested_scroll_margin_top">-180dp</dimen>
     <dimen name="subtitle_size_tab">16sp</dimen>
     <dimen name="title_size_tab">24sp</dimen>
+    <string name="OK">OK</string>
     <style name="Widget.Design.TabLayout" parent="Base.Widget.Design.TabLayout">
         <item name="tabGravity">center</item>
         <item name="tabMode">fixed</item>
