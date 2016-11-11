@@ -10,12 +10,14 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 
@@ -37,6 +39,8 @@ public class ArticleListActivity extends AppCompatActivity implements OnRefreshL
     private RecyclerView mRecyclerView;
     private CoordinatorLayout mCoordinatorLayout;
     private Adapter adapter;
+    private AppBarLayout paralexBar;
+    private boolean mIsRefreshing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,7 @@ public class ArticleListActivity extends AppCompatActivity implements OnRefreshL
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        paralexBar = (AppBarLayout) findViewById(R.id.toolbar_container);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.list_content);
@@ -58,6 +63,20 @@ public class ArticleListActivity extends AppCompatActivity implements OnRefreshL
         adapter = new Adapter(null);
         adapter.setHasStableIds(true);
         mRecyclerView.setAdapter(adapter);
+        if (paralexBar != null) {
+            mRecyclerView.addOnScrollListener(new OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    int max = paralexBar.getHeight();
+                    if (dy > 0) {
+                        paralexBar.setTranslationY(Math.max(-max, paralexBar.getTranslationY() - dy / 2));
+                    } else {
+                        paralexBar.setTranslationY(Math.min(0, paralexBar.getTranslationY() - dy / 2));
+                    }
+                }
+            });
+        }
 
         getLoaderManager().initLoader(0, null, this);
 
@@ -85,7 +104,11 @@ public class ArticleListActivity extends AppCompatActivity implements OnRefreshL
 
     }
 
-    private boolean mIsRefreshing = false;
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mRecyclerView.clearOnScrollListeners();
+    }
 
     private BroadcastReceiver mRefreshingReceiver = new BroadcastReceiver() {
         @Override
