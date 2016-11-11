@@ -40,6 +40,8 @@
                 android:paddingTop="@dimen/fab_padding"
                 android:textColor="@color/material_white"
                 android:textSize="@dimen/title_size"
+                android:paddingStart="@dimen/fab_padding"
+                android:paddingEnd="@dimen/fab_padding"
                 />
 
             <TextView
@@ -54,6 +56,8 @@
                 android:paddingTop="@dimen/default_margin"
                 android:textColor="@color/material_white"
                 android:textSize="@dimen/subtitle_size"
+                android:paddingEnd="@dimen/default_margin"
+                android:paddingStart="@dimen/default_margin"
                 />
         </LinearLayout>
     </LinearLayout>

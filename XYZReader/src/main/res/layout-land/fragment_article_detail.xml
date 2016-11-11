@@ -102,6 +102,8 @@
                             android:textColor="@color/material_white"
                             android:textSize="@dimen/title_size_tab"
                             android:textStyle="bold"
+                            android:paddingEnd="@dimen/fab_padding"
+                            android:paddingStart="@dimen/fab_padding"
                             />
 
                         <TextView
@@ -144,5 +146,6 @@
         android:src="@drawable/ic_share"
         app:layout_anchor="@+id/toolbar_det"
         app:layout_anchorGravity="bottom|right"
+        android:layout_marginEnd="@dimen/fab_padding"
         />
 </android.support.design.widget.CoordinatorLayout>
