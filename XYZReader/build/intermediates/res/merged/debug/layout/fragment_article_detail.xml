@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    tools:ignore="MergeRootFrame"
     >
 
     <android.support.design.widget.AppBarLayout
@@ -26,7 +27,6 @@
             app:layout_scrollFlags="scroll"
             app:toolbarId="@id/toolbar"
             >
-
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -54,10 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:orientation="vertical"
-                    android:paddingBottom="@dimen/detail_metabar_vert_padding"
-                    android:paddingLeft="@dimen/detail_inner_horiz_margin"
-                    android:paddingRight="@dimen/detail_inner_horiz_margin"
-                    android:paddingTop="@dimen/detail_metabar_vert_padding"
+                    android:padding="@dimen/default_margin"
                     >
 
                     <TextView
@@ -65,7 +62,6 @@
                         style="?android:attr/textAppearanceLarge"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-condensed"
                         android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"
                         android:textStyle="bold"
                         />
@@ -75,6 +71,7 @@
                         style="?android:attr/textAppearanceMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/material_white"
                         />
                 </LinearLayout>
             </FrameLayout>
@@ -96,24 +93,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
+        android:clipToPadding="true"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
-        <TextView
-            android:id="@+id/article_body"
-            style="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginRight="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin"
-            android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
-            android:textColor="@color/primary_text"
-            android:textColorLink="@color/accent"
-            tools:textSize="?android:attr/textAppearanceMedium"
-            />
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/card_view_margin"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/card_padding"
+            app:cardElevation="@dimen/cardview_default_elevation"
+            >
+
+            <TextView
+                android:id="@+id/article_body"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/default_margin"
+                android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
+                android:textColor="@color/primary_text"
+                android:textColorLink="@color/accent"
+                tools:textSize="?android:attr/textAppearanceMedium"
+                />
+        </android.support.v7.widget.CardView>
 
     </android.support.v4.widget.NestedScrollView>
 
@@ -126,7 +132,7 @@
         android:layout_marginRight="@dimen/fab_padding"
         android:contentDescription="@string/action_share"
         android:src="@drawable/ic_share"
-        app:layout_anchor="@id/photo_container"
+        app:layout_anchor="@id/toolbar_det"
         app:layout_anchorGravity="bottom|right|end"
         />
 

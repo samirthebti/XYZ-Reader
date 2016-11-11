@@ -8,11 +8,13 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.graphics.Palette;
+import android.support.v7.graphics.Palette.PaletteAsyncListener;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.format.DateUtils;
@@ -48,6 +50,7 @@ public class ArticleDetailFragment extends Fragment implements
     private long mItemId;
     private View mRootView;
     private CoordinatorLayout mCoordinatorLayout;
+    private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private Toolbar mToolbar;
     private View mPhotoContainerView;
     private ImageView mPhotoView;
@@ -112,17 +115,10 @@ public class ArticleDetailFragment extends Fragment implements
         bylineView = (TextView) mRootView.findViewById(R.id.article_byline);
         bodyView = (TextView) mRootView.findViewById(R.id.article_body);
         metaBar = (LinearLayout) mRootView.findViewById(R.id.meta_bar);
+        mCollapsingToolbarLayout = (CollapsingToolbarLayout) mRootView.findViewById(R.id.photo_container);
         // set up the toolbar
         mToolbar = (Toolbar) mRootView.findViewById(R.id.detail_toolbar);
-        ((ArticleDetailActivity) getActivity()).setSupportActionBar(mToolbar);
-        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
-        ((ArticleDetailActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mToolbar.setNavigationOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().finish();
-            }
-        });
+
         getLoaderManager().initLoader(0, null, this);
         return mRootView;
     }
@@ -160,6 +156,16 @@ public class ArticleDetailFragment extends Fragment implements
             bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY)));
             if (mToolbar != null) {
 //                mToolbar.setTitle(title);
+//                ((ArticleDetailActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+                ((ArticleDetailActivity) getActivity()).setSupportActionBar(mToolbar);
+                mToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+                ((ArticleDetailActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+                mToolbar.setNavigationOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        getActivity().finish();
+                    }
+                });
             }
 
             titleView.setText(title);
@@ -177,10 +183,21 @@ public class ArticleDetailFragment extends Fragment implements
                         @Override
                         public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                             Bitmap bitmap = ((GlideBitmapDrawable) resource.getCurrent()).getBitmap();
-                            Palette palette = Palette.generate(bitmap);
-                            int defaultColor = 0xFF333333;
-                            int color = palette.getDarkVibrantColor(defaultColor);
-                            metaBar.setBackgroundColor(color);
+                            Palette.from(bitmap).generate(new PaletteAsyncListener() {
+                                @Override
+                                public void onGenerated(Palette palette) {
+                                    int defaultColor = 0xFF333333;
+                                    int color = palette.getDarkVibrantColor(defaultColor);
+                                    metaBar.setBackgroundColor(color);
+                                    if (mCollapsingToolbarLayout != null) {
+                                        int scrimColor = palette.getDarkMutedColor(defaultColor);
+                                        mCollapsingToolbarLayout.setStatusBarScrimColor(scrimColor);
+                                        mCollapsingToolbarLayout.setContentScrimColor(scrimColor);
+                                    }
+                                }
+                            });
+
+
                             return false;
                         }
                     })
