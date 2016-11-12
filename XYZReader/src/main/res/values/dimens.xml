@@ -21,5 +21,6 @@
     <dimen name="subtitle_size_tab">16sp</dimen>
     <dimen name="title_size_tab">24sp</dimen>
     <dimen name="appbar_layou_size">260dp</dimen>
+    <dimen name="init_scroll_pos">40dp</dimen>
 
 </resources>

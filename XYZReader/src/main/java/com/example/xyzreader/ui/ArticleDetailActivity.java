@@ -1,5 +1,7 @@
 package com.example.xyzreader.ui;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.LoaderManager;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.SimpleOnPageChangeListener;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Explode;
 import android.view.ViewGroup;
@@ -31,6 +34,7 @@ public class ArticleDetailActivity extends AppCompatActivity
     private long mSelectedItemId;
     private ViewPager mPager;
     private MyPagerAdapter mPagerAdapter;
+    private NestedScrollView mScrollView;
 
 
     @Override
@@ -39,12 +43,14 @@ public class ArticleDetailActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_article_detail);
 
+
         getLoaderManager().initLoader(0, null, this);
         if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
             getWindow().setExitTransition(new Explode());
         }
         mPagerAdapter = new MyPagerAdapter(getFragmentManager());
         mPager = (ViewPager) findViewById(R.id.pager);
+        mScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
         mPager.setAdapter(mPagerAdapter);
         mPager.setOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
@@ -123,5 +129,15 @@ public class ArticleDetailActivity extends AppCompatActivity
         public int getCount() {
             return (mCursor != null) ? mCursor.getCount() : 0;
         }
+    }
+
+    @Override
+    public void onEnterAnimationComplete() {
+        super.onEnterAnimationComplete();
+        final int startScrollPos = getResources().getDimensionPixelOffset(R.dimen.init_scroll_pos);
+        Animator animator = ObjectAnimator.ofInt(mScrollView, "scrollY", startScrollPos).setDuration(300);
+        animator.start();
+
+
     }
 }
