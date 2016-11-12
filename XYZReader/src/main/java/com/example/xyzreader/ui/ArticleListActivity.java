@@ -60,7 +60,7 @@ public class ArticleListActivity extends AppCompatActivity implements OnRefreshL
         StaggeredGridLayoutManager staggeredGridLayoutManager =
                 new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(staggeredGridLayoutManager);
-        adapter = new Adapter(null);
+        adapter = new Adapter(null, this);
         adapter.setHasStableIds(true);
         mRecyclerView.setAdapter(adapter);
         if (paralexBar != null) {

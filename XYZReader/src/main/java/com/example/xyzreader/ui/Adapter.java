@@ -1,8 +1,12 @@
 package com.example.xyzreader.ui;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
@@ -26,10 +30,11 @@ import com.example.xyzreader.data.ItemsContract;
  * ----->> thebtisam@gmail.com <<-----
  */
 public class Adapter extends CursorRecyclerViewAdapter<Adapter.ViewHolder> {
+    private Context mContext;
 
-
-    public Adapter(Cursor cursor) {
+    public Adapter(Cursor cursor, Context context) {
         super(cursor);
+        mContext = context;
     }
 
 
@@ -73,14 +78,23 @@ public class Adapter extends CursorRecyclerViewAdapter<Adapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
+        View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_article, parent, false);
-        final ViewHolder vh = new ViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
+        final ViewHolder vh = new ViewHolder(v);
+        v.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                parent.getContext().startActivity(new Intent(Intent.ACTION_VIEW,
-                        ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
+            public void onClick(View views) {
+                Bundle bundle = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    bundle = ActivityOptions.
+                            makeSceneTransitionAnimation((Activity) mContext, vh.thumbnailView, vh.thumbnailView.getTransitionName()).toBundle();
+                    parent.getContext().startActivity(new Intent(Intent.ACTION_VIEW,
+                            ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))), bundle);
+                } else {
+                    parent.getContext().startActivity(new Intent(Intent.ACTION_VIEW,
+                            ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
+                }
+
             }
         });
         return vh;

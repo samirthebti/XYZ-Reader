@@ -36,6 +36,7 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
+                android:transitionName="@string/shared_transation"
                 />
 
             <android.support.v7.widget.Toolbar

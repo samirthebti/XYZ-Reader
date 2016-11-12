@@ -5,15 +5,20 @@ import android.app.FragmentManager;
 import android.app.LoaderManager;
 import android.content.Loader;
 import android.database.Cursor;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.SimpleOnPageChangeListener;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Explode;
 import android.view.ViewGroup;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
-import com.example.xyzreader.data.ItemsContract;
+import com.example.xyzreader.data.ArticleLoader.Query;
+import com.example.xyzreader.data.ItemsContract.Items;
 
 /**
  * An activity representing a single Article detail screen, letting you swipe between articles.
@@ -35,11 +40,13 @@ public class ArticleDetailActivity extends AppCompatActivity
         setContentView(R.layout.activity_article_detail);
 
         getLoaderManager().initLoader(0, null, this);
-
+        if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+            getWindow().setExitTransition(new Explode());
+        }
         mPagerAdapter = new MyPagerAdapter(getFragmentManager());
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(mPagerAdapter);
-        mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        mPager.setOnPageChangeListener(new SimpleOnPageChangeListener() {
             @Override
             public void onPageScrollStateChanged(int state) {
                 super.onPageScrollStateChanged(state);
@@ -51,14 +58,14 @@ public class ArticleDetailActivity extends AppCompatActivity
                 if (mCursor != null) {
                     mCursor.moveToPosition(position);
                 }
-                mSelectedItemId = mCursor.getLong(ArticleLoader.Query._ID);
+                mSelectedItemId = mCursor.getLong(Query._ID);
             }
         });
 
 
         if (savedInstanceState == null) {
             if (getIntent() != null && getIntent().getData() != null) {
-                mStartId = ItemsContract.Items.getItemId(getIntent().getData());
+                mStartId = Items.getItemId(getIntent().getData());
                 mSelectedItemId = mStartId;
             }
         }
