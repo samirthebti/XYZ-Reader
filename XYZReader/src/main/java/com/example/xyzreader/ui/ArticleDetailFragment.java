@@ -7,12 +7,15 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ShareCompat;
+import android.support.v4.app.ShareCompat.IntentBuilder;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.graphics.Palette;
 import android.support.v7.graphics.Palette.PaletteAsyncListener;
 import android.support.v7.widget.Toolbar;
@@ -35,6 +38,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
+import com.example.xyzreader.data.ArticleLoader.Query;
 
 /**
  * A fragment representing a single Article detail screen. This fragment is
@@ -82,9 +86,9 @@ public class ArticleDetailFragment extends Fragment implements
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             mItemId = getArguments().getLong(ARG_ITEM_ID);
-        }
 
-        setHasOptionsMenu(true);
+            setHasOptionsMenu(true);
+        }
     }
 
     public ArticleDetailActivity getActivityCast() {
@@ -100,6 +104,7 @@ public class ArticleDetailFragment extends Fragment implements
         // fragments because their mIndex is -1 (haven't been added to the activity yet). Thus,
         // we do this in onActivityCreated.
         getLoaderManager().initLoader(0, null, this);
+
     }
 
     @Override
@@ -118,8 +123,23 @@ public class ArticleDetailFragment extends Fragment implements
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) mRootView.findViewById(R.id.photo_container);
         // set up the toolbar
         mToolbar = (Toolbar) mRootView.findViewById(R.id.detail_toolbar);
+        if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+            shareActionButton.setAlpha(0f);
+            shareActionButton.setScaleX(0f);
+            shareActionButton.setScaleY(0f);
+            shareActionButton.setTranslationZ(1f);
+            shareActionButton.animate()
+                    .alpha(1f)
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .translationZ(25f)
+                    .setInterpolator(new FastOutSlowInInterpolator())
+                    .setStartDelay(300)
+                    .start();
+        }
 
         getLoaderManager().initLoader(0, null, this);
+
         return mRootView;
     }
 
@@ -143,17 +163,17 @@ public class ArticleDetailFragment extends Fragment implements
 
         if (mCursor != null) {
             mRootView.setVisibility(View.VISIBLE);
-            final String title = mCursor.getString(ArticleLoader.Query.TITLE);
+            final String title = mCursor.getString(Query.TITLE);
 
             bylineView.setText(Html.fromHtml(
                     DateUtils.getRelativeTimeSpanString(
-                            mCursor.getLong(ArticleLoader.Query.PUBLISHED_DATE),
+                            mCursor.getLong(Query.PUBLISHED_DATE),
                             System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
                             DateUtils.FORMAT_ABBREV_ALL).toString()
                             + " by <font color='#ffffff'>"
-                            + mCursor.getString(ArticleLoader.Query.AUTHOR)
+                            + mCursor.getString(Query.AUTHOR)
                             + "</font>"));
-            bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY)));
+            bodyView.setText(Html.fromHtml(mCursor.getString(Query.BODY)));
             if (mToolbar != null) {
                 ((ArticleDetailActivity) getActivity()).setSupportActionBar(mToolbar);
                 mToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
@@ -171,7 +191,7 @@ public class ArticleDetailFragment extends Fragment implements
             bylineView.setTypeface(mainTypeface);
             titleView.setTypeface(mainTypeface);
             Glide.with(getActivity())
-                    .load(mCursor.getString(ArticleLoader.Query.PHOTO_URL))
+                    .load(mCursor.getString(Query.PHOTO_URL))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .centerCrop()
                     .dontAnimate()
@@ -203,13 +223,15 @@ public class ArticleDetailFragment extends Fragment implements
                         }
                     })
                     .into(mPhotoView);
+
             shareActionButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(Intent.createChooser(ShareCompat.IntentBuilder.from(getActivity())
+                    startActivity(Intent.createChooser(IntentBuilder.from(getActivity())
                             .setType("text/plain")
                             .setText("Some sample text")
                             .getIntent(), getString(R.string.action_share)));
+
                 }
             });
         } else {
@@ -223,6 +245,5 @@ public class ArticleDetailFragment extends Fragment implements
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
         mCursor = null;
     }
-
 
 }
