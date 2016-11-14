@@ -17,7 +17,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 
@@ -63,21 +62,6 @@ public class ArticleListActivity extends AppCompatActivity implements OnRefreshL
         adapter = new Adapter(null, this);
         adapter.setHasStableIds(true);
         mRecyclerView.setAdapter(adapter);
-        if (paralexBar != null) {
-            mRecyclerView.addOnScrollListener(new OnScrollListener() {
-                @Override
-                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                    super.onScrolled(recyclerView, dx, dy);
-                    int max = paralexBar.getHeight();
-                    if (dy > 0) {
-                        paralexBar.setTranslationY(Math.max(-max, paralexBar.getTranslationY() - dy / 2));
-                    } else {
-                        paralexBar.setTranslationY(Math.min(0, paralexBar.getTranslationY() - dy / 2));
-                    }
-                }
-            });
-        }
-
         getLoaderManager().initLoader(0, null, this);
 
         if (savedInstanceState == null) {
