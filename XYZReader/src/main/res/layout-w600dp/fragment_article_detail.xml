@@ -22,7 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMargin="@dimen/expanded_title_margin_size"
             app:expandedTitleMarginBottom="@dimen/expanded_title_margin_bottom_size"
             app:expandedTitleTextAppearance="@style/ExpandedTitleTextAppearance"

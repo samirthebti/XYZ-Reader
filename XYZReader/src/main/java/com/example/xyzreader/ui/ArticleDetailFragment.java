@@ -123,6 +123,23 @@ public class ArticleDetailFragment extends Fragment implements
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) mRootView.findViewById(R.id.photo_container);
         // set up the toolbar
         mToolbar = (Toolbar) mRootView.findViewById(R.id.detail_toolbar);
+
+
+        getLoaderManager().initLoader(0, null, this);
+
+        return mRootView;
+    }
+
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        return ArticleLoader.newInstanceForItemId(getActivity(), mItemId);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // animating the share botton
         if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
             shareActionButton.setAlpha(0f);
             shareActionButton.setScaleX(0f);
@@ -137,16 +154,6 @@ public class ArticleDetailFragment extends Fragment implements
                     .setStartDelay(300)
                     .start();
         }
-
-        getLoaderManager().initLoader(0, null, this);
-
-        return mRootView;
-    }
-
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return ArticleLoader.newInstanceForItemId(getActivity(), mItemId);
     }
 
     @Override

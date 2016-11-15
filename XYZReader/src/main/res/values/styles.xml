@@ -19,13 +19,12 @@
     <!--Theme style-->
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowTranslucentStatus">true</item>
+
         <item name="colorAccent">@color/accent</item>
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="android:textColor">@color/material_white</item>
         <item name="android:textColorHint">@color/secondary_text</item>
-        <item name="android:windowSharedElementEnterTransition">@transition/move</item>
 
     </style>
 

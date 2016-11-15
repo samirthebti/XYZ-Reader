@@ -1,7 +1,5 @@
 package com.example.xyzreader.ui;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.LoaderManager;
@@ -131,13 +129,5 @@ public class ArticleDetailActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public void onEnterAnimationComplete() {
-        super.onEnterAnimationComplete();
-        final int startScrollPos = getResources().getDimensionPixelOffset(R.dimen.init_scroll_pos);
-        Animator animator = ObjectAnimator.ofInt(mScrollView, "scrollY", startScrollPos).setDuration(300);
-        animator.start();
 
-
-    }
 }
